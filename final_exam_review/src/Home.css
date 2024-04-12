@@ -1,0 +1,6 @@
+.checkBoxes{
+    background-color: grey;
+    display: flex;
+    padding: 10px;
+    justify-content: space-around;
+}
