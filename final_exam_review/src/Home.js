@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import './Home.css';
 
 function Home(){
     const navigate = useNavigate();
+    const [footerVisible, setFooterVisible] = useState(true);
+
+    const footer = 
+        <div>
+            <p>This is the optional footer, click the button to toggle its visibility</p>
+        </div>;
 
     function goToLogin(){
         navigate("/Login");
+    }
+
+    function toggleFooter(){
+        setFooterVisible(!footerVisible);
     }
 
     return(
@@ -27,6 +37,8 @@ function Home(){
                 <input id='option3' type='checkbox'></input>
             </div>
         </div>
+        <button onClick={toggleFooter}>Toggle Footer</button>
+        {footerVisible && footer}
     </div>
     );
 }
