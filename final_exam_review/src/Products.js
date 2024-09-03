@@ -27,6 +27,32 @@ function Products(){
         .finally(setIsLoading(false));
     }
 
+    const addProduct = () => {
+        const text = document.getElementById('newComp').value;
+        const object = JSON.parse(text);
+        console.log('Checkpoint');
+        addData(object);
+    }
+
+    async function addData(newProduct){
+        fetch("http://localhost:3000/Products", {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify(newProduct),
+        })
+        .then(response => {
+            console.log(response);
+            return response.json();
+        })
+        .then(data => {
+            console.log('POST Data: ', data)
+            console.log(data.message);
+        })
+        .catch(error => console.error(error));
+    }
+
     function formatData(){
         return(
             <div>
@@ -43,6 +69,12 @@ function Products(){
             <button onClick={fetchData}>Load Products</button>
             {isLoading && loadingComp}
             {formatData()}
+            <div className='input-area'>
+                <label htmlFor='newComp'>Add new person</label>
+                <input type='textarea' id='newComp'/>
+                <br/>
+                <button type='submit' onClick={addProduct}>Submit</button>
+            </div>
         </div>
     );
 }

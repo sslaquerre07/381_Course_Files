@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import './Home.css';
 
@@ -16,8 +16,13 @@ function Home(){
     }
 
     function toggleFooter(){
+        localStorage.setItem('newVisibility', !footerVisible);
         setFooterVisible(!footerVisible);
     }
+
+    useEffect(() => {
+        console.log(localStorage.getItem('newVisibility'));
+    }, [footerVisible]);
 
     return(
     <div>
